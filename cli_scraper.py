@@ -1,8 +1,3 @@
-Okay, here is the entire cli_scraper.py file with the console alignment fixes integrated.
-I've incorporated the following changes as discussed:
- * Defined STAT_ITEM_WIDTH = 18 and CONSOLE_TARGET_WIDTH = 155 at the beginning of the run_scraper() function.
- * Modified the nested format_stat_display() helper function to use STAT_ITEM_WIDTH for padding its output.
- * Ensured that line1, line2, and line3 (now assigned to display_line1, display_line2, display_line3 after padding) are padded using .ljust(CONSOLE_TARGET_WIDTH) before being printed to the console.
 import csv
 import os
 import sys
