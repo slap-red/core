@@ -1,0 +1,67 @@
+# Abbreviation Dictionary
+
+This dictionary explains common abbreviations used in the `bonus.py` and `downline.py` scripts.
+
+## General Variables & Concepts
+
+* **`cfg`**: `AppConfig` object, holds the loaded configuration from `config.ini`.
+* **`bns` / `bonus`**: Refers to Bonus data or operations.
+* **`dnln` / `downline`**: Refers to Downline data or operations.
+* **`DIR`**: Absolute directory path of the currently running script.
+* **`T_O`**: Default Timeout in seconds for HTTP requests.
+* **`XSTAT`**: Fixed width for individual statistic items in the console display (e.g., `"10/5(+5)"`).
+* **`XUI`**: Target total width for each line of the console display UI block.
+* **`auth`**: `AuthData` object, containing authentication details for a site.
+* **`dl_res`**: Downline result (from processing a site for downlines).
+* **`b_res`**: Bonus result (from processing a site for bonuses).
+* **`norm_pct`**: Normalized percent complete (0.0 to 1.0) for progress bar.
+* **`prog_bar`**: Progress bar string for console display.
+* **`flags_disp`**: Bonus type flags display string for console.
+* **`l1`, `l2`, `l3`**: Raw content lines (1, 2, 3) for the console display block before padding.
+* **`dl1`, `dl2`, `dl3`**: Padded display lines (1, 2, 3) for the console after adjusting to `XUI`.
+* **`sfs`**: Site From Cache (the specific site's data entry from `run_cache`).
+* **`stat_b`, `stat_d_disp`, `stat_e`**: Formatted statistic strings for bonuses, downlines (display), and errors for console.
+
+## Cache-Related Prefixes
+(for variables holding data about specific sites from `run_cache`)
+
+* **`p_*`**: Previous run's new items for the site (e.g., `p_b` = previous new bonuses).
+* **`pt_*`**: Previous run's total (cumulative) items for the site (e.g., `pt_b` = previous total bonuses).
+* **`s_*`**: Site-specific values for the current run/step (e.g., `s_b` = current site's new bonuses).
+* **`s_b_amt`**: Site bonus amount for the current run.
+* **`n_*`**: New values (from cache, reflecting current run's processing) for display (e.g., `n_b` = new/current site bonuses for display).
+* **`nt_*`**: New total values (from cache, reflecting current run's processing) for display (e.g., `nt_b` = new/current total site bonuses for display).
+
+## Logger Event Message Strings
+(used as `event_msg` in `logger.emit()`)
+
+The first argument to `logger.emit()` (e.g., `"jbeg"`, `"login_ok"`) is the main log message string. The filtering of these messages is now primarily controlled by the logger's overall level (set via `"LESS"`, `"MORE"`, `"MAX"` in `config.ini` which maps to Python's `DEBUG`, `INFO`, `WARNING`) and the `severity_str` passed to `emit()`.
+
+**Common `event_msg` examples and their typical `severity_str`:**
+
+* **`jbeg`/`jend_summary`**: Script run start/finish (`INFO`)
+* **`login_summary_success`**: Login attempt successful (`INFO`)
+* **`login_summary_failed`**: Login attempt failed (`WARNING`)
+* **`api_login_req`/`api_login_resp`**: API Request / API Response details (`DEBUG`)
+* **`bns_data_summary`/`dnln_data_summary`**: Summary of data fetched (`INFO` or `DEBUG`)
+* **`site_unresponsive_load`**: Site unresponsive (`WARNING`)
+* **`bns_api_err_detail`**: Error reported by bonus API (`WARNING` or `ERROR`)
+* **`bns_data_proc_err`**: Error during data processing (`WARNING`)
+* **`run_mode_bns`**: Config loaded successfully (`INFO`)
+* **`job_critical_error`**: Critical error during job (`CRITICAL`)
+* **`url_file_missing`**: Error related to file operations (`ERROR`)
+
+## Detail fields in log messages
+(often passed in the `details` dictionary to `logger.emit()`)
+
+* **`merch`**: Merchant name
+* **`mod`**: API Module name
+* **`act`**: Action (e.g., "login")
+* **`stat`**: API Status from response
+* **`op`**: Operation (e.g., for CSV error context)
+* **`ctx`**: Context (e.g., for an exception)
+* **`proc`**: Processed count (e.g., items processed in a batch)
+* **`err`**: Error message string
+* **`msg`**: General message string
+* **`desc`**: Description string
+* **`trace`**: Python traceback string
