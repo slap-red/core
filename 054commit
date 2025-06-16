@@ -1,0 +1,23 @@
+git commit \
+-m "refactor(core)!: Transition to fully modular package structure for v0.5.4" \
+-m "This is a major release that refactors the entire codebase from a single-script implementation to a formal, modular Python package. This architectural overhaul enhances scalability, testability, and maintainability.
+
+BREAKING CHANGE: The application is no longer run as \`python bonus.py\`. The new entry point is \`python -m src.main\`, reflecting the change to a package structure." \
+-m "### Features
+
+- **feat(analysis):** Introduce historical comparison reporting.
+    - A new \`analysis.py\` module has been created to handle post-scraping data analysis.
+    - The application now generates a daily \`comparison_report_[YYYY-MM-DD].csv\`.
+    - This report compares the current day's bonus data against the previous day's, categorizing items as \"New\", \"Used\", and \"Persistent\" (changed or unchanged), providing deep insights into bonus volatility.
+- **feat(data):** Implement historical data archiving in Excel.
+    - Daily bonus CSVs are now systematically archived into \`data/historical_bonuses.xlsx\`. Each day's data is stored on a separate sheet named \`MM-DD\`." \
+-m "### Refactoring
+
+- **refactor(architecture):** Migrated from a single-script (\`bonus.py\`) to a full package structure under the \`src/\` directory.
+    - Logic has been deconstructed and organized into dedicated modules: \`main.py\` (orchestrator), \`auth.py\`, \`scraper.py\`, \`analysis.py\`, \`config.py\`, \`logger.py\`, and \`utils.py\`.
+    - This separation of concerns makes the codebase significantly cleaner and easier to maintain and extend.
+- **refactor(scraper):** The core scraping logic has been moved into the \`Scraper\` class within \`src/scraper.py\`, separating it from the main application flow." \
+-m "### Documentation
+
+- **docs(readme):** Updated the \`README.md\` to reflect the new package structure, installation instructions, and operational commands (\`python -m src.main\`).
+- **docs(infographic):** The interactive infographic SPA has been overhauled to visualize the new architecture and features of v0.5.4."
